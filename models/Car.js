@@ -12,6 +12,9 @@ class Car extends Model {
     static get tableName() {
         return 'cars';
     }
+    static get idColumn() {
+        return 'id';
+    }
 
     static get relationMappings() {
         return {
@@ -46,5 +49,3 @@ class Car extends Model {
         });
     }
 }
-
-let car =

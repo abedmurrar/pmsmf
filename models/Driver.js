@@ -8,6 +8,9 @@ class Driver extends Model {
     static get tableName() {
         return 'drivers';
     }
+    static get idColumn() {
+        return 'id';
+    }
 
     static get relationMappings() {
         return {

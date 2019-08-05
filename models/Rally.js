@@ -8,19 +8,21 @@ class Rally extends Model {
     static get tableName() {
         return 'rallies';
     }
-
-    // static get relationMappings() {
-    //     return {
-    //         drivers: {
-    //             relation: Model.HasManyRelation,
-    //             modelClass: Driver,
-    //             join: {
-    //                 from: 'drivers.car_id',
-    //                 to: 'cars.id'
-    //             }
-    //         }
-    //     };
-    // }
+    static get idColumn() {
+            return 'id';
+        }
+        // static get relationMappings() {
+        //     return {
+        //         drivers: {
+        //             relation: Model.HasManyRelation,
+        //             modelClass: Driver,
+        //             join: {
+        //                 from: 'drivers.car_id',
+        //                 to: 'cars.id'
+        //             }
+        //         }
+        //     };
+        // }
 
     async createSchema() {
 
@@ -40,21 +42,16 @@ class Rally extends Model {
         // Create table
         await knex.schema.createTableIfNotExists('drivers', table => {
             table.increments('id').primary().notNullable();
-            table.string('first_name', 20).notNullable();
-            table.string('last_name', 20).notNullable();
-            table.string('nationality', 20).nullable();
-            table.string('address', 20).nullable();
-            table.string('id_card_no', 9).nullable();
-            table.string('mobile', 10).nullable();
-            table.string('email', 30).unique().nullable();
-            table.string('sponsor', 40).nullable();
-            table.integer('car_id', 11).nullable();
+            table.string('name', 30).notNullable();
+            table.string('city', 20).nullable();
+            table.date('date').nullable();
+            table.integer('type', 11).nullable();
             table.string('remarks');
 
-            table.foreign('car_id', 'idcars_idx')
+            table.foreign('type', 'rally_type_fk_idx')
                 .references('id')
-                .inTable('cars')
-                .onDelete('SET NULL')
+                .inTable('rally_types')
+                .onDelete('NO ACTION')
                 .onUpdate('NO ACTION');
 
             table.charset('utf8_general_ci');
