@@ -1,11 +1,12 @@
 const { Model } = require('objection');
 const Driver = require('./Driver');
+const Rally = require('./Rally')
 
 
-class Car extends Model {
+class Drift extends Model {
 
     static get tableName() {
-        return 'cars';
+        return 'drift_manage';
     }
     static get idColumn() {
         return 'id';
@@ -13,17 +14,15 @@ class Car extends Model {
 
     static get relationMappings() {
         return {
-            drivers: {
-                relation: Model.HasManyRelation,
-                modelClass: Driver,
+            rally: {
+                relation: Model.BelongsToOneRelation,
+                modelClass: Rally,
                 join: {
-                    from: 'cars.id',
-                    to: 'drivers.car_id'
+                    from: 'drift_manage.rally_id',
+                    to: 'rallies.id'
                 }
             }
         };
     }
 
 }
-
-module.exports = Car;
