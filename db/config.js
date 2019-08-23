@@ -1,8 +1,8 @@
-"use strict";
+const knex = require('knex');
+const knexfile = require('../knexfile');
 
-const env =
-    process.env.NODE_ENV === "production" ? "production" : "development";
-const knexfile = require("../knexfile");
-const knex = require("knex")(knexfile[env]);
+const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
-module.exports = knex;
+const knexConfig = knex(knexfile[env]);
+
+module.exports = knexConfig;

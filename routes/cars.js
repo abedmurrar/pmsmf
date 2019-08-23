@@ -7,7 +7,7 @@ const router = express.Router();
 const { Car } = require('../models');
 
 /* GET array of cars */
-router.get('/', async(req, res, next) => {
+router.get('/', async (req, res) => {
     const cars = await Car.query();
     res.json(cars);
 });
@@ -16,22 +16,22 @@ router.get('/', async(req, res, next) => {
 
 router
     .route('/:id')
-    .get('/:id', async(req, res, next) => {
+    .get('/:id', async (req, res) => {
         const car = await Car.query()
             .findById(req.params.id)
-            .eager("drivers");
+            .eager('drivers');
         res.json(car);
     })
-    .put('/:id', async(req, res, next) => {
+    .put('/:id', async (req, res) => {
         const car = await Car.query()
             .findById(req.params.id)
-            .eager("drivers");
+            .eager('drivers');
         res.json(car);
     })
-    .delete('/:id', async(req, res, next) => {
+    .delete('/:id', async (req, res) => {
         const car = await Car.query()
             .findById(req.params.id)
-            .eager("drivers");
+            .eager('drivers');
         res.json(car);
     });
 

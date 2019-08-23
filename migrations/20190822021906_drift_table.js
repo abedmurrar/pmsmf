@@ -17,50 +17,50 @@ CREATE TABLE `drift_manage` (
 */
 
 exports.up = function(knex) {
-    return knex.schema.hasTable("drift_manage").then(function(exists) {
+    return knex.schema.hasTable('drift_manage').then(function(exists) {
         if (!exists) {
-            return knex.schema.createTable("drift_manage", function(table) {
+            return knex.schema.createTable('drift_manage', function(table) {
                 table
-                    .increments("id")
+                    .increments('id')
                     .primary()
                     .notNullable();
                 table
-                    .integer("rally_id")
+                    .integer('rally_id')
                     .notNullable()
                     .unsigned();
                 table
-                    .integer("driver_id")
+                    .integer('driver_id')
                     .notNullable()
                     .unsigned();
                 table
-                    .integer("racing_number")
+                    .integer('racing_number')
                     .notNullable()
                     .unsigned();
-                table.integer("score_1").notNullable();
-                table.integer("score_2").notNullable();
-                table.integer("score_3").notNullable();
+                table.integer('score_1').notNullable();
+                table.integer('score_2').notNullable();
+                table.integer('score_3').notNullable();
 
                 table
-                    .foreign("rally_id", "rally_id_fk_idx")
-                    .references("id")
-                    .inTable("rallies")
-                    .onDelete("CASCADE")
-                    .onUpdate("NO ACTION");
+                    .foreign('rally_id', 'rally_id_fk_idx')
+                    .references('id')
+                    .inTable('rallies')
+                    .onDelete('CASCADE')
+                    .onUpdate('NO ACTION');
 
                 table
-                    .foreign("driver_id", "driver_id_fk_idx")
-                    .references("id")
-                    .inTable("drivers")
-                    .onDelete("CASCADE")
-                    .onUpdate("NO ACTION");
+                    .foreign('driver_id', 'driver_id_fk_idx')
+                    .references('id')
+                    .inTable('drivers')
+                    .onDelete('CASCADE')
+                    .onUpdate('NO ACTION');
 
-                table.charset("utf8");
-                table.engine("InnoDB");
+                table.charset('utf8');
+                table.engine('InnoDB');
             });
         }
     });
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists("drift_manage");
+    return knex.schema.dropTableIfExists('drift_manage');
 };

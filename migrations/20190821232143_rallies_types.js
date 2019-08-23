@@ -8,21 +8,21 @@ CREATE TABLE `rally_types` (
 */
 
 exports.up = function(knex) {
-    return knex.schema.hasTable("rally_types").then(function(exists) {
+    return knex.schema.hasTable('rally_types').then(function(exists) {
         if (!exists) {
-            return knex.schema.createTable("rally_types", function(table) {
+            return knex.schema.createTable('rally_types', function(table) {
                 table
-                    .increments("id")
+                    .increments('id')
                     .primary()
                     .notNullable();
-                table.string("rally_type", 15).nullable();
-                table.charset("utf8");
-                table.engine("InnoDB");
+                table.string('rally_type', 15).nullable();
+                table.charset('utf8');
+                table.engine('InnoDB');
             });
         }
     });
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists("rally_types");
+    return knex.schema.dropTableIfExists('rally_types');
 };
