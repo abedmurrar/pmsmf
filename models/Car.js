@@ -10,6 +10,24 @@ class Car extends Model {
         return 'id';
     }
 
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: ['manufacturer', 'model', 'car_class'],
+            properties: {
+                id: { type: 'integer' },
+                manufacturer: { type: 'string' },
+                model: { type: 'string' },
+                year_of_production: { type: 'integer' },
+                license_no: { type: 'string', pattern: '^[A-Za-Z0-9]{6,7}$' },
+                motor_capacity: { type: 'string' },
+                car_class: { type: 'string' }, // TODO: figure out this shit
+                remarks: { type: 'string' }
+            },
+            additionalProperties: false
+        };
+    }
+
     static get relationMappings() {
         return {
             drivers: {
