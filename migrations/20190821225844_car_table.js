@@ -15,26 +15,29 @@ CREATE TABLE `cars` (
 */
 
 exports.up = function(knex) {
-    return knex.schema.hasTable('cars').then(function(exists) {
+    return knex.schema.hasTable("cars").then(function(exists) {
         if (!exists) {
-            return knex.schema.createTable('cars', function(table) {
-                table.increments('id').primary().notNullable();
-                table.string('manufacturer', 20).notNullable();
-                table.string('model', 20).nullable();
-                table.specificType('year_of_production', 'YEAR(4)').nullable();
-                table.string('license_no', 10).nullable();
-                table.string('motor_capacity', 10).nullable();
-                table.string('car_class', 6).nullable();
-                table.string('push_type', 10).nullable();
-                table.string('remarks');
+            return knex.schema.createTable("cars", function(table) {
+                table
+                    .increments("id")
+                    .primary()
+                    .notNullable();
+                table.string("manufacturer", 20).notNullable();
+                table.string("model", 20).nullable();
+                table.specificType("year_of_production", "YEAR(4)").nullable();
+                table.string("license_no", 10).nullable();
+                table.string("motor_capacity", 10).nullable();
+                table.string("car_class", 6).nullable();
+                table.string("push_type", 10).nullable();
+                table.string("remarks");
 
-                table.charset('utf8');
-                table.engine('InnoDB');
+                table.charset("utf8");
+                table.engine("InnoDB");
             });
         }
     });
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists('cars');
+    return knex.schema.dropTableIfExists("cars");
 };

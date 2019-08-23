@@ -18,37 +18,51 @@ CREATE TABLE `speed_manage` (
 */
 
 exports.up = function(knex) {
-    return knex.schema.hasTable('speed_manage').then(function(exists) {
+    return knex.schema.hasTable("speed_manage").then(function(exists) {
         if (!exists) {
-            return knex.schema.createTable('speed_manage', function(table) {
-                table.increments('id').primary().notNullable();
-                table.integer('rally_id').notNullable().unsigned();
-                table.integer('driver_id').notNullable().unsigned();
-                table.integer('racing_number').notNullable().unsigned();
-                table.time('time_1', { precision: 6 }).notNullable();
-                table.time('time_2', { precision: 6 }).notNullable();
-                table.time('time_3', { precision: 6 }).notNullable();
-                table.time('best_time', { precision: 6 }).notNullable();
+            return knex.schema.createTable("speed_manage", function(table) {
+                table
+                    .increments("id")
+                    .primary()
+                    .notNullable();
+                table
+                    .integer("rally_id")
+                    .notNullable()
+                    .unsigned();
+                table
+                    .integer("driver_id")
+                    .notNullable()
+                    .unsigned();
+                table
+                    .integer("racing_number")
+                    .notNullable()
+                    .unsigned();
+                table.time("time_1", { precision: 6 }).notNullable();
+                table.time("time_2", { precision: 6 }).notNullable();
+                table.time("time_3", { precision: 6 }).notNullable();
+                table.time("best_time", { precision: 6 }).notNullable();
 
-                table.foreign('rally_id', 'speed_rally_id_fk_idx')
-                    .references('id')
-                    .inTable('rallies')
-                    .onDelete('CASCADE')
-                    .onUpdate('NO ACTION');
+                table
+                    .foreign("rally_id", "speed_rally_id_fk_idx")
+                    .references("id")
+                    .inTable("rallies")
+                    .onDelete("CASCADE")
+                    .onUpdate("NO ACTION");
 
-                table.foreign('driver_id', 'speed_driver_id_fk_idx')
-                    .references('id')
-                    .inTable('drivers')
-                    .onDelete('CASCADE')
-                    .onUpdate('NO ACTION');
+                table
+                    .foreign("driver_id", "speed_driver_id_fk_idx")
+                    .references("id")
+                    .inTable("drivers")
+                    .onDelete("CASCADE")
+                    .onUpdate("NO ACTION");
 
-                table.charset('utf8');
-                table.engine('InnoDB');
+                table.charset("utf8");
+                table.engine("InnoDB");
             });
         }
     });
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTableIfExists('speed_manage');
+    return knex.schema.dropTableIfExists("speed_manage");
 };

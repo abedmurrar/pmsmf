@@ -1,14 +1,12 @@
-const { Model } = require('objection');
-const Driver = require('./Driver');
-
+const { Model } = require("objection");
+const Driver = require("./Driver");
 
 class Car extends Model {
-
     static get tableName() {
-        return 'cars';
+        return "cars";
     }
     static get idColumn() {
-        return 'id';
+        return "id";
     }
 
     static get relationMappings() {
@@ -17,13 +15,12 @@ class Car extends Model {
                 relation: Model.HasManyRelation,
                 modelClass: Driver,
                 join: {
-                    from: 'cars.id',
-                    to: 'drivers.car_id'
+                    from: "cars.id",
+                    to: "drivers.car_id"
                 }
             }
         };
     }
-
 }
 
 module.exports = Car;

@@ -1,15 +1,12 @@
-const { Model } = require('objection');
-const Driver = require('./Driver');
-const Rally = require('./Rally')
-
+const { Model } = require("objection");
+const Rally = require("./Rally");
 
 class Drift extends Model {
-
     static get tableName() {
-        return 'drift_manage';
+        return "drift_manage";
     }
     static get idColumn() {
-        return 'id';
+        return "id";
     }
 
     static get relationMappings() {
@@ -18,11 +15,12 @@ class Drift extends Model {
                 relation: Model.BelongsToOneRelation,
                 modelClass: Rally,
                 join: {
-                    from: 'drift_manage.rally_id',
-                    to: 'rallies.id'
+                    from: "drift_manage.rally_id",
+                    to: "rallies.id"
                 }
             }
         };
     }
-
 }
+
+module.exports = Drift;
