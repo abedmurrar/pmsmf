@@ -3,6 +3,8 @@ const express = require('express');
 
 const router = express.Router();
 
+const HTTPStatus = require('./status_codes');
+
 /* Model */
 const { Car } = require('../models');
 
@@ -12,27 +14,24 @@ router.get('/', async (req, res) => {
     res.json(cars);
 });
 
-/* GET car by id */
-
 router
     .route('/:id')
-    .get('/:id', async (req, res) => {
+    .get(async (req, res) => {
         const car = await Car.query()
             .findById(req.params.id)
             .eager('drivers');
         res.json(car);
     })
-    .put('/:id', async (req, res) => {
+    .put(async (req, res) => {
         const car = await Car.query()
             .findById(req.params.id)
             .eager('drivers');
         res.json(car);
     })
-    .delete('/:id', async (req, res) => {
-        const car = await Car.query()
-            .findById(req.params.id)
-            .eager('drivers');
-        res.json(car);
+    .delete(async (req, res) => {
+        const isDeleted = await Car.query().deleteById(req.params.id);
+        if (isDeleted) res.status(HTTPStatus.NO_CONTENT).json(null);
+        else throw new Error('Not found');
     });
 
 module.exports = router;
