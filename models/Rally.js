@@ -11,6 +11,22 @@ class Rally extends Model {
         return 'id';
     }
 
+    static get jsonSchema() {
+        return {
+            type: 'object',
+            required: ['name'],
+            properties: {
+                id: { type: 'integer' },
+                name: { type: 'string' },
+                city: { type: 'string' },
+                date: { type: 'string', format: 'date' },
+                type: { type: 'integer' },
+                remarks: { type: 'string' }
+            },
+            additionalProperties: false
+        };
+    }
+
     static get relationMappings() {
         return {
             drivers: {

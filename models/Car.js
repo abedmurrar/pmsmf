@@ -13,7 +13,7 @@ class Car extends Model {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['manufacturer', 'model', 'car_class'],
+            required: ['manufacturer', 'model', 'car_class', 'push_type'],
             properties: {
                 id: { type: 'integer' },
                 manufacturer: { type: 'string' },
@@ -22,6 +22,7 @@ class Car extends Model {
                 license_no: { type: 'string', pattern: '^[A-Za-Z0-9]{6,7}$' },
                 motor_capacity: { type: 'string' },
                 car_class: { type: 'string' }, // TODO: figure out this shit
+                push_type: { type: 'string' },
                 remarks: { type: 'string' }
             },
             additionalProperties: false
