@@ -11,6 +11,10 @@ class Rally extends Model {
         return 'id';
     }
 
+    static get useLimitInFirst() {
+        return true;
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
@@ -29,6 +33,7 @@ class Rally extends Model {
 
     static get relationMappings() {
         return {
+            // TODO : this shouldn't be here, it shoud be in Speed and Drift
             drivers: {
                 relation: Model.HasManyRelation,
                 modelClass: Driver,

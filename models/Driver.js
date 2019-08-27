@@ -10,6 +10,10 @@ class Driver extends Model {
         return 'id';
     }
 
+    static get useLimitInFirst() {
+        return true;
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
@@ -22,7 +26,7 @@ class Driver extends Model {
                 address: { type: 'string' },
                 id_card_no: { type: 'string', pattern: '^[0-9]+$' },
                 mobile: { type: 'string', pattern: '^[0-9]+$' },
-                email: { type: 'string', format: 'email' }, // TODO: figure out this shit
+                email: { type: 'string', format: 'email' },
                 sponsor: { type: 'string' },
                 car_id: { type: 'integer' },
                 remarks: { type: 'string' }

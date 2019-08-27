@@ -10,6 +10,10 @@ class Car extends Model {
         return 'id';
     }
 
+    static get useLimitInFirst() {
+        return true;
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
@@ -19,7 +23,7 @@ class Car extends Model {
                 manufacturer: { type: 'string' },
                 model: { type: 'string' },
                 year_of_production: { type: 'integer' },
-                license_no: { type: 'string', pattern: '^[A-Za-Z0-9]{6,7}$' },
+                license_no: { type: 'string', pattern: '^[A-Za-z0-9]{6,7}$' },
                 motor_capacity: { type: 'string' },
                 car_class: { type: 'string' }, // TODO: figure out this shit
                 push_type: { type: 'string' },

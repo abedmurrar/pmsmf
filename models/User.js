@@ -9,6 +9,10 @@ class User extends Model {
         return 'id';
     }
 
+    static get useLimitInFirst() {
+        return true;
+    }
+
     static get jsonSchema() {
         return {
             type: 'object',
