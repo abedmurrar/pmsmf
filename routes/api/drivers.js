@@ -3,37 +3,35 @@ const express = require('express');
 
 const router = express.Router();
 
-const HTTPStatus = require('./status_codes');
+const HTTPStatus = require('../status_codes');
 
 /* Model */
-const { Car } = require('../models');
+const { Driver } = require('../../models');
 
 /* GET array of cars */
 router.get('/', async (req, res) => {
-    const cars = await Car.query();
-    res.json(cars);
+    const drivers = await Driver.query().eager('car');
+    res.json(drivers);
 });
 
 router
     .route('/:id')
     .get(async (req, res) => {
-        const car = await Car.query()
+        const driver = await Driver.query()
             .findById(req.params.id)
-            .eager('drivers');
-        res.json(car);
+            .eager('car');
+        res.json(driver);
     })
     .put(async (req, res) => {
-        const car = await Car.query()
+        const driver = await Driver.query()
             .findById(req.params.id)
-            .eager('drivers');
-        res.json(car);
+            .eager('car');
+        res.json(driver);
     })
     .delete(async (req, res) => {
-        const isDeleted = await Car.query().deleteById(req.params.id);
+        const isDeleted = await Driver.query().deleteById(req.params.id);
         if (isDeleted) res.status(HTTPStatus.NO_CONTENT).json(null);
         else throw new Error('Not found');
     });
 
 module.exports = router;
-
-// TODO: READ https://github.com/Vincit/objection.js/blob/master/examples/express-es6/api.js
