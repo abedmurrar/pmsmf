@@ -20,7 +20,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    knex.schema.table('drift_manage', function(table) {
+    return knex.schema.table('drift_manage', function(table) {
         table
             .integer('score_1')
             .notNullable()

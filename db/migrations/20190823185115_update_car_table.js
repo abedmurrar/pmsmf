@@ -26,7 +26,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    knex.schema.table('cars', function(table) {
+    return knex.schema.table('cars', function(table) {
         table
             .string('model', 20)
             .nullable()

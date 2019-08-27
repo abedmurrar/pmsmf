@@ -24,7 +24,7 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    knex.schema.table('speed_manage', function(table) {
+    return knex.schema.table('speed_manage', function(table) {
         table
             .time('time_1', 6)
             .notNullable()
