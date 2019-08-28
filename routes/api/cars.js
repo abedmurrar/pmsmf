@@ -38,7 +38,6 @@ router
         else throw new Error('Not found');
     });
 
-
 module.exports = router;
 
 // TODO: READ https://github.com/Vincit/objection.js/blob/master/examples/express-es6/api.js
