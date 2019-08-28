@@ -1,7 +1,7 @@
-const { Model } = require('objection');
+const BaseModel = require('./BaseModel');
 const Rally = require('./Rally');
 
-class Drift extends Model {
+class Drift extends BaseModel {
     static get tableName() {
         return 'drift_manage';
     }
@@ -36,7 +36,7 @@ class Drift extends Model {
     static get relationMappings() {
         return {
             rally: {
-                relation: Model.BelongsToOneRelation,
+                relation: BaseModel.BelongsToOneRelation,
                 modelClass: Rally,
                 join: {
                     from: 'drift_manage.rally_id',

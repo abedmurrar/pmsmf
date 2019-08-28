@@ -1,8 +1,8 @@
-const { Model } = require('objection');
+const BaseModel = require('./BaseModel');
 const Driver = require('./Driver');
 const Car = require('./Car');
 
-class Rally extends Model {
+class Rally extends BaseModel {
     static get tableName() {
         return 'rallies';
     }
@@ -35,7 +35,7 @@ class Rally extends Model {
         return {
             // TODO : this shouldn't be here, it shoud be in Speed and Drift
             drivers: {
-                relation: Model.HasManyRelation,
+                relation: BaseModel.HasManyRelation,
                 modelClass: Driver,
                 join: {
                     from: 'rallies.driver_id',
@@ -43,7 +43,7 @@ class Rally extends Model {
                 }
             },
             cars: {
-                relation: Model.ManyToManyRelation,
+                relation: BaseModel.ManyToManyRelation,
                 modelClass: Car,
                 join: {
                     from: 'rallies.driver_id',

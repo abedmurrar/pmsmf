@@ -1,7 +1,7 @@
-const { Model } = require('objection');
+const BaseModel = require('./BaseModel');
 const Rally = require('./Rally');
 
-class Speed extends Model {
+class Speed extends BaseModel {
     static get tableName() {
         return 'speed_manage';
     }
@@ -37,7 +37,7 @@ class Speed extends Model {
     static get relationMappings() {
         return {
             rally: {
-                relation: Model.BelongsToOneRelation,
+                relation: BaseModel.BelongsToOneRelation,
                 modelClass: Rally,
                 join: {
                     from: 'speed_manage.rally_id',
