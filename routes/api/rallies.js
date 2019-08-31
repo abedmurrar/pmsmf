@@ -8,32 +8,60 @@ const HTTPStatus = require('../status_codes');
 /* Model */
 const { Rally } = require('../../models');
 
-// TODO : 1) check session 2) check permission
+const { noQueryParams } = require('../middleware');
 
-/* GET array of cars */
-router.get('/', async (req, res) => {
-    const rallies = await Rally.query().eager('car');
-    res.json(rallies);
-});
-
+/* GET array of rallies */
 router
-    .route('/:id')
-    .get(async (req, res) => {
-        const rally = await Rally.query()
-            .findById(req.params.id)
-            .eager('car');
-        res.json(rally);
+    .route('/rallies/:id?')
+    .get(async (req, res, next) => {
+        if (req.params.id) {
+            return next();
+        }
+        const rallies = await Rally.query()
+            // .eager('drivers')
+            .throwIfNotFound();
+        res.json(rallies);
     })
-    .put(async (req, res) => {
-        const rally = await Rally.query()
-            .findById(req.params.id)
-            .eager('car');
-        res.json(rally);
+    .post(noQueryParams, async (req, res, next) => {
+        try {
+            const rally = await Rally.query().insertGraphAndFetch(req.body);
+            res.status(HTTPStatus.CREATED).json(rally);
+        } catch (err) {
+            next(err);
+        }
     })
-    .delete(async (req, res) => {
-        const isDeleted = await Rally.query().deleteById(req.params.id);
-        if (isDeleted) res.status(HTTPStatus.NO_CONTENT).json(null);
-        else throw new Error('Not found');
+    .get(async (req, res, next) => {
+        try {
+            const rally = await Rally.query()
+                .findById(req.params.id)
+                // .eager('drivers')
+                .throwIfNotFound();
+            res.json(rally);
+        } catch (err) {
+            next(err);
+        }
+    })
+    .put(async (req, res, next) => {
+        try {
+            const rally = await Rally.query()
+                .patchAndFetchById(req.params.id, req.body)
+                .throwIfNotFound();
+            res.status(HTTPStatus.OK).json(rally);
+        } catch (err) {
+            next(err);
+        }
+    })
+    .delete(async (req, res, next) => {
+        try {
+            await Rally.query()
+                .deleteById(req.params.id)
+                .throwIfNotFound();
+            res.status(HTTPStatus.NO_CONTENT).json(null);
+        } catch (err) {
+            next(err);
+        }
     });
 
 module.exports = router;
+
+// TODO: READ https://github.com/Vincit/objection.js/blob/master/examples/express-es6/api.js

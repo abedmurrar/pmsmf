@@ -4,7 +4,8 @@ const express = require('express');
 const router = express.Router();
 
 router.route('/').get(async (req, res) => {
-    res.render('index.ejs');
+    console.log(req.params)
+    res.render('base.ejs',{title:'abed'});
 });
 
 module.exports = router;

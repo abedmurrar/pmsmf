@@ -8,14 +8,32 @@ const HTTPStatus = require('../status_codes');
 /* Model */
 const { Driver } = require('../../models');
 
-/* GET array of cars */
-router.get('/', async (req, res) => {
-    const drivers = await Driver.query().eager('car');
-    res.json(drivers);
-});
+const { noQueryParams } = require('../middleware');
 
+/* GET array of cars */
 router
-    .route('/:id')
+    .route('/drivers/:id?')
+    .get(async (req, res, next) => {
+        if (req.params.id) {
+            return next();
+        }
+        try {
+            const drivers = await Driver.query()
+                // .eager('car')
+                .throwIfNotFound();
+            res.json(drivers);
+        } catch (err) {
+            next(err);
+        }
+    })
+    .post(noQueryParams, async (req, res, next) => {
+        try {
+            const driver = await Driver.query().insertGraphAndFetch(req.body);
+            res.status(HTTPStatus.CREATED).json(driver);
+        } catch (err) {
+            next(err);
+        }
+    })
     .get(async (req, res, next) => {
         try {
             const driver = await Driver.query()
@@ -30,17 +48,16 @@ router
     .put(async (req, res, next) => {
         try {
             const driver = await Driver.query()
-                .findById(req.params.id)
-                .eager('car')
+                .patchAndFetchById(req.params.id, req.body)
                 .throwIfNotFound();
-            res.json(driver);
+            res.status(HTTPStatus.OK).json(driver);
         } catch (err) {
             next(err);
         }
     })
     .delete(async (req, res, next) => {
         try {
-            const isDeleted = await Driver.query()
+            await Driver.query()
                 .deleteById(req.params.id)
                 .throwIfNotFound();
             res.status(HTTPStatus.NO_CONTENT).json(null);
