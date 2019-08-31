@@ -1,17 +1,8 @@
 const BaseModel = require('./BaseModel');
-const Car = require('./Car');
 
 class Driver extends BaseModel {
     static get tableName() {
         return 'drivers';
-    }
-
-    static get idColumn() {
-        return 'id';
-    }
-
-    static get useLimitInFirst() {
-        return true;
     }
 
     static get jsonSchema() {
@@ -39,7 +30,7 @@ class Driver extends BaseModel {
         return {
             car: {
                 relation: BaseModel.BelongsToOneRelation,
-                modelClass: Car,
+                modelClass: 'Car',
                 join: {
                     from: 'drivers.car_id',
                     to: 'cars.id'

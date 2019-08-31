@@ -6,14 +6,6 @@ class Drift extends BaseModel {
         return 'drift_manage';
     }
 
-    static get idColumn() {
-        return 'id';
-    }
-
-    static get useLimitInFirst() {
-        return true;
-    }
-
     static get jsonSchema() {
         return {
             type: 'object',
