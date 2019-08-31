@@ -1,17 +1,18 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 const path = require('path');
-const debug = require('debug')('knex_config');
+const debug = require('debug')('knexfile:log');
 
 module.exports = {
     development: {
         client: 'mysql',
         debug: true,
         connection: {
-            host: '127.0.0.1',
-            user: 'admin',
-            password: '246805@Abed',
-            database: 'pmsmf'
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_SCHEMA,
+            port: process.env.DB_PORT
         },
         log: {
             warn(message) {
@@ -27,8 +28,27 @@ module.exports = {
                 console.info(message);
             },
             debug(message) {
-                debug(message);
-                console.debug(message);
+                if (Array.isArray(message)) {
+                    message.forEach(object => {
+                        debug(
+                            '\x1b[36m',
+                            '\x1b[40m',
+                            object.sql,
+                            ' \x1b[32m',
+                            object.bindings,
+                            '\x1b[0m'
+                        );
+                    });
+                } else {
+                    debug(
+                        '\x1b[36m',
+                        '\x1b[40m',
+                        message.sql,
+                        ' \x1b[32m',
+                        message.bindings,
+                        '\x1b[0m'
+                    );
+                }
             }
         },
         migrations: {
