@@ -4,23 +4,21 @@ const faker = require('faker');
 const carClasses = ['A', 'B', 'C'];
 const pushTypes = ['REAR', 'FRONT', '4x4'];
 
-const createFakeCar = () => ({
-    manufacturer: faker.company.bsNoun(),
-    model: faker.random.alphaNumeric(3),
-    car_class: faker.random.arrayElement(carClasses),
-    push_type: faker.random.arrayElement(pushTypes)
+const createFakeDriver = () => ({
+    first_name: faker.name.firstName(),
+    last_name: faker.name.lastName()
 });
 exports.seed = function(knex) {
     // Deletes ALL existing entries
 
-    // const fakeCars = [];
-    // const desiredFakeCars = 100;
-    // for (let i = 0; i < desiredFakeCars; i++) {
-    //     fakeCars.push(createFakeCar());
+    // const fakeDrivers = [];
+    // const desiredFakeDrivers = 100;
+    // for (let i = 0; i < desiredFakeDrivers; i++) {
+    //     fakeDrivers.push(createFakeDriver());
     // }
-    // return knex('cars').insert(fakeCars);
+    // return knex('drivers').insert(fakeDrivers);
     // .del()
-    // .then(function() {
+    // .then(function() {console.log('jahez')})
     //     // Inserts seed entries
     //     return knex('cars').insert([
     //         { id: 1, manufacturer: 'SEAT', model: 'IBIZA', car_class: 'A', push_type: 'Front' },

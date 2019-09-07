@@ -1,5 +1,6 @@
 /* Express Router */
 const express = require('express');
+const { body, sanitizeBody } = require('express-validator');
 
 const router = express.Router();
 
@@ -22,14 +23,41 @@ router
             .throwIfNotFound();
         res.json(cars);
     })
-    .post(noQueryParams, async (req, res, next) => {
-        try {
-            const car = await Car.query().insertGraphAndFetch(req.body);
-            res.status(HTTPStatus.CREATED).json(car);
-        } catch (err) {
-            next(err);
+    .post(
+        [
+            body('manufacturer')
+                .isString()
+                .trim()
+                .escape(),
+            body('model')
+                .isString()
+                .trim()
+                .escape(),
+            body('year_of_production')
+                .isNumeric()
+                .matches('^[0-9]{4}$'),
+            body('license_no')
+                .isNumeric()
+                .matches('^[A-Za-z0-9]{6,7}$'),
+            body('car_class')
+                .isString()
+                .trim()
+                .escape(),
+            body('push_type')
+                .isString()
+                .trim()
+                .escape()
+        ],
+        noQueryParams,
+        async (req, res, next) => {
+            try {
+                const car = await Car.query().insertGraphAndFetch(req.body);
+                res.status(HTTPStatus.CREATED).json(car);
+            } catch (err) {
+                next(err);
+            }
         }
-    })
+    )
     .get(async (req, res, next) => {
         try {
             const car = await Car.query()
@@ -63,5 +91,3 @@ router
     });
 
 module.exports = router;
-
-// TODO: READ https://github.com/Vincit/objection.js/blob/master/examples/express-es6/api.js

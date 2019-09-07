@@ -14,11 +14,11 @@ class Car extends BaseModel {
                 id: { type: 'integer' },
                 manufacturer: { type: 'string' },
                 model: { type: 'string' },
-                year_of_production: { type: 'integer' },
+                year_of_production: { type: 'integer', pattern: '^[0-9]{4}$' },
                 license_no: { type: 'string', pattern: '^[A-Za-z0-9]{6,7}$' },
                 motor_capacity: { type: 'string' },
                 car_class: { type: 'string' }, // TODO: figure out this shit
-                push_type: { type: 'string' },
+                push_type: { type: 'integer' },
                 remarks: { type: 'string' }
             },
             additionalProperties: false
