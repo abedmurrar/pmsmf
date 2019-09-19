@@ -45,7 +45,6 @@ morgan.token('body', function(req, res) {
     return JSON.stringify(req.body);
 });
 morgan.token('headers', function(req, res) {
-    // TODO: update the behavior
     let string = '';
     console.log(string);
     return string;
@@ -60,8 +59,6 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// TODO: Use helmet
-// TODO: Add middleware for errors in API, errors in Views
 /* Session Settings */
 app.set('trust proxy', 1); // trust first proxy
 app.use(

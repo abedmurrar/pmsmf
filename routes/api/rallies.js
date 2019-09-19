@@ -98,5 +98,3 @@ router
     .delete();
 
 module.exports = router;
-
-// TODO: READ https://github.com/Vincit/objection.js/blob/master/examples/express-es6/api.js
