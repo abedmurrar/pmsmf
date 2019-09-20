@@ -15,13 +15,31 @@ const { noQueryParams } = require('../middleware');
 router
     .route('/cars/:id?')
     .get(async (req, res, next) => {
+        console.log(req.query);
+        const { draw, columns, order, start, length, search, _ } = req.query;
+        // console.log(req.query.columns[0].search)
         if (req.params.id) {
             return next();
         }
+
+        Car.knex().from('cars').columnInfo().then(console.log)
+
+        const columnsNames = columns.map(column => column.data);
+        const eagerColumnNames = columnsNames.filter(
+            column => column in Object.keys(Car.relationMappings)
+        );
+        const orders = order.map(orderObj => {
+            return { column: columnsNames[orderObj.column], order: orderObj.dir };
+        });
         const cars = await Car.query()
-            .eager('drivers')
+            .select(columnsNames)
+            .eager(eagerColumnNames)
+            .offset(parseInt(start, 10) + 1)
+            .limit(length)
+            .range()
+            .orderBy(orders)
             .throwIfNotFound();
-        res.json(cars);
+        res.json({ data: cars, draw, recordsTotal: cars.total, recordsFiltered: cars.total });
     })
     .post(
         [
@@ -63,6 +81,7 @@ router
             const car = await Car.query()
                 .findById(req.params.id)
                 .eager('drivers')
+                .limit(10)
                 .throwIfNotFound();
             res.json(car);
         } catch (err) {
