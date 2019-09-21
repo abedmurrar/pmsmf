@@ -14,7 +14,9 @@ router.get('/cars', async (req, res) => {
     res.render('tables/cars.ejs', { title: 'cars' });
 });
 
-// router.get('/cars/create')
+router.get('/cars/create', async (req, res) => {
+    res.render('forms/carCreate.ejs', { title: 'Create car' });
+});
 
 router.get('/drivers', async (req, res) => {
     res.render('tables/drivers.ejs', { title: 'drivers' });

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class='no-js lt-ie9 lt-ie8 lt-ie7'> <![endif]-->
+<!--[if IE 7]>         <html class='no-js lt-ie9 lt-ie8'> <![endif]-->
+<!--[if IE 8]>         <html class='no-js lt-ie9'> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+    <!--<![endif]-->
+    <%- include('../includes/head') %>
+    <body>
+        <%- include('../includes/header') %>
+        <div class="container-fluid">
+            <div class="row">
+                <%- include('../includes/nav') %>
+                <div
+                    class="card col-xl-10 offset-xl-2 col-9 offset-3 col-md-9 offset-md-3 col-lg-10 offset-lg-2 col-sm-8 offset-sm-4 mr-1" >
+                    <div class="card-body">
+                        <div class="">
+                        <form>
+                            <div class="form-group">
+                                <label for="manufacturer">Manufacturer</label>
+                                <input type="text" name="manufacturer" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="model">Model</label>
+                                <input type="text" name='model' class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="year_of_production">Year of production</label>
+                                <input type="number" name="year_of_production" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="license_no">License</label>
+                                <input type="number" name="license_no" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="motor_capacity">Motor Capacity</label>
+                                <input type="text" name="motor_capacity" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="car_class">Class</label>
+                                <input type="text" name="car_class" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="push_type">Push Type</label>
+                                <select name="push_type" class="form-control">
+                                    <option value="F">Front</option>
+                                    <option value="R">Rear</option>
+                                    <option value="4">4x4</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="remarks">Remarks</label>
+                                <textarea name="remarks" class="form-control" cols="30" rows="10"></textarea>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">
+                You are using an <strong>outdated</strong> browser. Please
+                <a href="#">upgrade your browser</a> to improve your experience.
+            </p>
+        <![endif]-->
+
+        <script>
+            $(document).ready(function() {
+                const table = $('#cars').DataTable({
+                    ajax: {
+                        url: '/api/cars',
+                        dataSrc: 'data.results'
+                    },
+                    columns: [
+                        { title: 'ID', data: 'id' },
+                        { title: 'Manufacturer', data: 'manufacturer' },
+                        { title: 'Model', data: 'model' },
+                        { title: 'YOP', data: 'year_of_production' },
+                        { title: 'License', data: 'license_no' },
+                        { title: 'Motor Cap', data: 'motor_capacity' },
+                        { title: 'Class', data: 'car_class' },
+                        { title: 'Push', data: 'push_type' },
+                        { title: 'Remarks', data: 'remarks' },
+                    ],
+                    processing: true,
+                    serverSide: true,
+                    deferRender: true
+                });
+
+                table.on('draw', function(e, settiongs){
+                    console.log(e)
+                    console.log(settiongs)
+                })
+            });
+        </script>
+    </body>
+</html>
