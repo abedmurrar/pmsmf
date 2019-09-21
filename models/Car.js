@@ -18,7 +18,7 @@ class Car extends BaseModel {
                 license_no: { type: 'string', pattern: '^[A-Za-z0-9]{6,7}$' },
                 motor_capacity: { type: 'string' },
                 car_class: { type: 'string' }, // TODO: figure out this shit
-                push_type: { type: 'integer' },
+                push_type: { type: 'string' },
                 remarks: { type: 'string' }
             },
             additionalProperties: false
