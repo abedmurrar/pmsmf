@@ -22,6 +22,10 @@ router.get('/drivers', async (req, res) => {
     res.render('tables/drivers.ejs', { title: 'drivers' });
 });
 
+router.get('/drivers/create', async (req, res) => {
+    res.render('forms/driverCreate.ejs', { title: '`Create Driver' });
+});
+
 router.get('/rallies', async (req, res) => {
     res.render('tables/rallies.ejs', { title: 'rallies' });
 });

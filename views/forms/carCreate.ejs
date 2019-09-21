@@ -52,6 +52,8 @@
                                 <label for="remarks">Remarks</label>
                                 <textarea name="remarks" class="form-control" cols="30" rows="10"></textarea>
                             </div>
+
+                            
                         </form>
                         </div>
                     </div>
@@ -64,35 +66,5 @@
                 <a href="#">upgrade your browser</a> to improve your experience.
             </p>
         <![endif]-->
-
-        <script>
-            $(document).ready(function() {
-                const table = $('#cars').DataTable({
-                    ajax: {
-                        url: '/api/cars',
-                        dataSrc: 'data.results'
-                    },
-                    columns: [
-                        { title: 'ID', data: 'id' },
-                        { title: 'Manufacturer', data: 'manufacturer' },
-                        { title: 'Model', data: 'model' },
-                        { title: 'YOP', data: 'year_of_production' },
-                        { title: 'License', data: 'license_no' },
-                        { title: 'Motor Cap', data: 'motor_capacity' },
-                        { title: 'Class', data: 'car_class' },
-                        { title: 'Push', data: 'push_type' },
-                        { title: 'Remarks', data: 'remarks' },
-                    ],
-                    processing: true,
-                    serverSide: true,
-                    deferRender: true
-                });
-
-                table.on('draw', function(e, settiongs){
-                    console.log(e)
-                    console.log(settiongs)
-                })
-            });
-        </script>
     </body>
 </html>
