@@ -15,7 +15,7 @@ exports.up = function(knex) {
                     .increments('id')
                     .primary()
                     .notNullable();
-                table.string('rally_type', 15).nullable();
+                table.string('rally_type').nullable();
                 table.charset('utf8');
                 table.engine('InnoDB');
             });

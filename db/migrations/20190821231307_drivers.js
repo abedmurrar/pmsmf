@@ -27,17 +27,17 @@ exports.up = function(knex) {
                     .primary()
                     .notNullable()
                     .unsigned();
-                table.string('first_name', 20).notNullable();
-                table.string('last_name', 20).notNullable();
-                table.string('nationality', 20).nullable();
-                table.string('address', 20).nullable();
-                table.string('id_card_no', 9).nullable();
-                table.string('mobile', 10).nullable();
+                table.string('first_name').notNullable();
+                table.string('last_name').notNullable();
+                table.string('nationality').nullable();
+                table.string('address').nullable();
+                table.string('id_card_no').nullable();
+                table.string('mobile').nullable();
                 table
-                    .string('email', 30)
+                    .string('email')
                     .unique()
                     .nullable();
-                table.string('sponsor', 40).nullable();
+                table.string('sponsor').nullable();
                 table
                     .integer('car_id', 11)
                     .nullable()

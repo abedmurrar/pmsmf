@@ -6,11 +6,11 @@ exports.up = function(knex) {
                     .increments('id')
                     .primary()
                     .notNullable();
-                table.string('username', 20).notNullable();
-                table.string('first_name', 20).notNullable();
-                table.string('last_name', 20).notNullable();
-                table.string('password', 255).notNullable();
-                table.string('salt', 20).notNullable();
+                table.string('username').notNullable();
+                table.string('first_name').notNullable();
+                table.string('last_name').notNullable();
+                table.string('password').notNullable();
+                table.string('salt').notNullable();
 
                 table.charset('utf8');
                 table.engine('InnoDB');

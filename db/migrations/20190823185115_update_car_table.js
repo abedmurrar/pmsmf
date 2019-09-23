@@ -9,15 +9,15 @@ exports.up = function(knex) {
         if (exists) {
             return knex.schema.alterTable('cars', function(table) {
                 table
-                    .string('model', 20)
+                    .string('model')
                     .notNullable()
                     .alter();
                 table
-                    .string('car_class', 6)
+                    .string('car_class')
                     .notNullable()
                     .alter();
                 table
-                    .string('push_type', 10)
+                    .string('push_type')
                     .notNullable()
                     .alter();
             });
@@ -28,15 +28,15 @@ exports.up = function(knex) {
 exports.down = function(knex) {
     return knex.schema.table('cars', function(table) {
         table
-            .string('model', 20)
+            .string('model')
             .nullable()
             .alter();
         table
-            .string('car_class', 6)
+            .string('car_class')
             .nullable()
             .alter();
         table
-            .string('push_type', 10)
+            .string('push_type')
             .nullable()
             .alter();
     });

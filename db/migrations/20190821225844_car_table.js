@@ -22,13 +22,13 @@ exports.up = function(knex) {
                     .increments('id')
                     .primary()
                     .notNullable();
-                table.string('manufacturer', 20).notNullable();
-                table.string('model', 20).nullable();
+                table.string('manufacturer').notNullable();
+                table.string('model').nullable();
                 table.specificType('year_of_production', 'YEAR(4)').nullable();
-                table.string('license_no', 10).nullable();
-                table.string('motor_capacity', 10).nullable();
-                table.string('car_class', 6).nullable();
-                table.string('push_type', 10).nullable();
+                table.string('license_no').nullable();
+                table.string('motor_capacity').nullable();
+                table.string('car_class').nullable();
+                table.string('push_type').nullable();
                 table.string('remarks');
 
                 table.charset('utf8');

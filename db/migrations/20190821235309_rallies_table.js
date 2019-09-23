@@ -21,8 +21,8 @@ exports.up = function(knex) {
                     .increments('id')
                     .primary()
                     .notNullable();
-                table.string('name', 30).notNullable();
-                table.string('city', 20).nullable();
+                table.string('name').notNullable();
+                table.string('city').nullable();
                 table.date('date').nullable();
                 table
                     .integer('type', 11)
