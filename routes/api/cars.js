@@ -1,10 +1,7 @@
 /* Express Router */
 const express = require('express');
-const { body, sanitizeBody } = require('express-validator');
 
 const router = express.Router();
-
-const HTTPStatus = require('../status_codes');
 
 /* Model */
 const { Car } = require('../../models');
@@ -18,7 +15,7 @@ const CarController = new BaseController(Car);
 router
     .route('/cars/:id?')
     .get(CarController.getObjectsWithPagination)
-    .post(carValidation, CarController.createOne)
+    .post(noQueryParams, carValidation, CarController.createOne)
     .get(CarController.getOneById)
     .put(CarController.updateOneById)
     .delete(CarController.deleteOneById);

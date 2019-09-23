@@ -1,12 +1,13 @@
 /* Express Router */
 const express = require('express');
+
 const router = express.Router();
 
 /* Model */
 const { Driver } = require('../../models');
 const BaseController = require('../../controllers/baseController');
 
-const { noQueryParams } = require('../middleware');
+const { noQueryParams, driverValidation } = require('../middleware');
 
 const DriverController = new BaseController(Driver);
 
@@ -14,7 +15,7 @@ const DriverController = new BaseController(Driver);
 router
     .route('/drivers/:id?')
     .get(DriverController.getObjectsWithPagination)
-    .post(noQueryParams, DriverController.createOne)
+    .post(noQueryParams, driverValidation, DriverController.createOne)
     .get(DriverController.getOneById)
     .put(DriverController.updateOneById)
     .delete(DriverController.deleteOneById);
