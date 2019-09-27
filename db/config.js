@@ -10,10 +10,13 @@ const knexConfig = knex(knexfile[env]);
 knexConfig.migrate
     .latest()
     .then(() => {
-        return knexConfig.seed.run();
+        console.log('Start seeding');
+        const seeds = knexConfig.seed.run();
+        console.log('Finish seeding');
+        return seeds;
     })
     .then(() => {
-        debug('Migrations finished')
+        debug('Migrations finished');
     })
     .catch(err => {
         console.error(err);
