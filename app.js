@@ -17,9 +17,11 @@ Model.knex(knex);
 const carsRouter = require('./routes/api/cars');
 const driversRouter = require('./routes/api/drivers');
 const ralliesRouter = require('./routes/api/rallies');
+const usersRouter = require('./routes/api/users');
 
 const indexRouter = require('./routes/index');
 
+const ACCESS_LOG_FILE = path.resolve('access.log');
 /* Application start */
 const app = express();
 
@@ -28,7 +30,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 /* Middlewares */
-app.use(require('express-status-monitor')());
+
 app.use(
     helmet({
         xssFilter: true,
@@ -41,19 +43,18 @@ app.use(
     })
 );
 
-morgan.token('body', function(req, res) {
+morgan.token('body', function(req) {
     return JSON.stringify(req.body);
 });
-morgan.token('headers', function(req, res) {
+morgan.token('headers', function(req) {
     // TODO: update the behavior
-    let string = '';
-    console.log(string);
+    const string = JSON.stringify(req.headers);
     return string;
 });
 app.use(morgan('dev'));
 app.use(
     morgan('":method :url :http-version\n:headers\n\n :body"\n:status :response-time ms\n\n', {
-        stream: fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
+        stream: fs.createWriteStream(ACCESS_LOG_FILE, { flags: 'a' })
     })
 );
 
@@ -84,6 +85,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 /* Routers */
 app.use('/', indexRouter);
 
-app.use('/api', [carsRouter, driversRouter, ralliesRouter]);
+app.use('/api', [carsRouter, driversRouter, ralliesRouter, usersRouter]);
 
 module.exports = app;
