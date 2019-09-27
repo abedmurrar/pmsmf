@@ -1,5 +1,6 @@
 const HTTPStatus = require('../routes/status_codes');
-const { check, validationResult } = require('express-validator');
+
+// const { check, validationResult } = require('express-validator');
 
 class BaseController {
     constructor(model) {
@@ -47,7 +48,6 @@ class BaseController {
         // if (!errors.isEmpty()) {
         //     return res.status(422).json({ errors: errors.array() });
         // }
-        console.log(req.body)
         try {
             const createdObject = await this.model.query().insertGraphAndFetch(req.body);
             res.status(HTTPStatus.CREATED).json(createdObject);
