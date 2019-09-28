@@ -18,39 +18,57 @@
                         <form>
                             <div class="form-group">
                                 <label for="manufacturer">Manufacturer</label>
-                                <input type="text" name="manufacturer" class="form-control">
+                                <input type="text" name="manufacturer" class="form-control" value="<%= form && form.manufacturer %>">
                             </div>
                             <div class="form-group">
                                 <label for="model">Model</label>
-                                <input type="text" name='model' class="form-control">
+                                <input type="text" name='model' class="form-control" value="<%= form && form.model %>">
                             </div>
                             <div class="form-group">
                                 <label for="year_of_production">Year of production</label>
-                                <input type="number" name="year_of_production" class="form-control">
+                                <input type="number" name="year_of_production" class="form-control" value="<%= form && form.year_of_production %>">
                             </div>
                             <div class="form-group">
                                 <label for="license_no">License</label>
-                                <input type="number" name="license_no" class="form-control">
+                                <input type="number" name="license_no" class="form-control" value="<%= form && form.license_no %>">
                             </div>
                             <div class="form-group">
                                 <label for="motor_capacity">Motor Capacity</label>
-                                <input type="text" name="motor_capacity" class="form-control">
+                                <input type="text" name="motor_capacity" class="form-control" value="<%= form && form.motor_capacity %>">
                             </div>
                             <div class="form-group">
                                 <label for="car_class">Class</label>
-                                <input type="text" name="car_class" class="form-control">
+                                <input type="text" name="car_class" class="form-control" value="<%= form.car_class %>">
                             </div>
                             <div class="form-group">
                                 <label for="push_type">Push Type</label>
                                 <select name="push_type" class="form-control">
-                                    <option value="F">Front</option>
-                                    <option value="R">Rear</option>
-                                    <option value="4">4x4</option>
+                                    <option value="F"
+                                        <% if (form && form.push_type === "F") { %>
+                                            selected="selected"
+                                        <% } %>
+                                        >
+                                        Front
+                                    </option>
+                                    <option value="R"
+                                        <% if (form && form.push_type === "R") { %>
+                                            selected="selected"
+                                        <% } %>
+                                    >
+                                    Rear
+                                    </option>
+                                    <option value="4"
+                                        <% if (form && form.push_type === "4") { %>
+                                            selected="selected"
+                                        <% } %>
+                                    >
+                                    4x4
+                                    </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="remarks">Remarks</label>
-                                <textarea name="remarks" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea name="remarks" class="form-control" cols="30" rows="10" value="<%= form && form.remarks %>"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

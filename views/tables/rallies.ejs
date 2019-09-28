@@ -54,6 +54,11 @@
             deferRender: true
         });
 
+        table.buttons().action( function( e, dt, button, config ) {
+    console.log( 'Button '+this.text()+' activated' );
+    this.disable();
+} );
+
         table.on('draw', function(e, settiongs) {
             console.log(e);
             console.log(settiongs);
