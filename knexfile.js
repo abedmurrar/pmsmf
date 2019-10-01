@@ -5,7 +5,7 @@ const debug = require('debug')('knexfile:log');
 
 module.exports = {
     development: {
-        client: 'mysql',
+        client: 'mysql2',
         debug: true,
         connection: {
             host: process.env.DB_HOST,
