@@ -32,17 +32,23 @@
                                 <label for="type">License</label>
                                 <select name="type" class="form-control">
                                     <option value="1"
-                                    <% if (form && form.push_type === "F") { %>
+                                        <% if (form && form.push_type == 1) { %>
                                             selected="selected"
                                         <% } %>
                                     >
                                     Speed
                                     </option>
                                     <option value="2"
+                                        <% if (form && form.push_type == 2) { %>
+                                            selected="selected"
+                                        <% } %>
                                     >
                                     Drift
                                     </option>
                                     <option value="3"
+                                        <% if (form && form.push_type == 3) { %>
+                                            selected="selected"
+                                        <% } %>
                                     >
                                     4x4
                                     </option>
@@ -50,7 +56,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="remarks">Remarks</label>
-                                <textarea name="remarks" class="form-control" cols="30" rows="10"></textarea>
+                                <textarea name="remarks" class="form-control" cols="30" rows="10" value="<%= form && form.remarks %>"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
