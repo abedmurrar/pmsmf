@@ -1,7 +1,7 @@
-/* eslint-disable no-console */
+/* eslint-disable security/detect-object-injection */
+const debug = require('debug')('knexconfig:log');
 const knex = require('knex');
 const knexfile = require('../knexfile');
-const debug = require('debug')('knexconfig:log');
 
 const env = process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
@@ -10,16 +10,16 @@ const knexConfig = knex(knexfile[env]);
 knexConfig.migrate
     .latest()
     .then(() => {
-        console.log('Start seeding');
+        debug('Start seeding');
         const seeds = knexConfig.seed.run();
-        console.log('Finish seeding');
+        debug('Finish seeding');
         return seeds;
     })
     .then(() => {
         debug('Migrations finished');
     })
     .catch(err => {
-        console.error(err);
+        debug(err);
     });
 
 module.exports = knexConfig;

@@ -15,7 +15,7 @@ const CarController = new BaseController(Car);
 router
     .route('/cars/:id?')
     .get(CarController.getObjectsWithPagination)
-    .post(noQueryParams, carValidation, CarController.createOne)
+    .post(carValidation, CarController.createOne)
     .get(CarController.getOneById)
     .put(CarController.updateOneById)
     .delete(CarController.deleteOneById);

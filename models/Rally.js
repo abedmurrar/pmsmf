@@ -1,8 +1,20 @@
+/* eslint-disable max-classes-per-file */
 const BaseModel = require('./BaseModel');
 const Driver = require('./Driver');
 const Car = require('./Car');
+const { Model, QueryBuilder, ValidationError } = require('objection');
+
+class SelectWithJoin extends QueryBuilder {
+    // select() {
+    //     return this.join('rally_types', 'rallies.type', `rally_types.id`);
+    // }
+}
 
 class Rally extends BaseModel {
+    // static get QueryBuilder() {
+    //     return SelectWithJoin;
+    // }
+
     static get tableName() {
         return 'rallies';
     }

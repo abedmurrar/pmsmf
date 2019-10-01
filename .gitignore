@@ -65,3 +65,6 @@ typings/
 
 # testing file
 test.js
+
+# local files
+knexfile.local.js

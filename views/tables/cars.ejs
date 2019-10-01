@@ -51,7 +51,17 @@
                 { title: 'Motor Cap', data: 'motor_capacity' },
                 { title: 'Class', data: 'car_class' },
                 { title: 'Push', data: 'push_type' },
-                { title: 'Remarks', data: 'remarks' }
+                { title: 'Remarks', data: 'remarks' },
+                 /* EDIT */ {
+            mRender: function (data, type, row) {
+                return '<a class="table-edit" data-id="' + row[0] + '">EDIT</a>'
+            }
+        },
+        /* DELETE */ {
+            mRender: function (data, type, row) {
+                return '<a class="table-delete" data-id="' + row[0] + '">DELETE</a>'
+            }
+        }
             ],
             processing: true,
             serverSide: true,
