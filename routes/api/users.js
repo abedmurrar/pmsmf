@@ -5,9 +5,8 @@ const router = express.Router();
 
 /* Model */
 const { User } = require('../../models');
-// const UserController = require('../../controllers/UserController');
-const BaseController = require('../../controllers/baseController');
-const { noQueryParams, userValidation } = require('../middleware');
+const { BaseController } = require('../../controllers');
+const { userValidation } = require('../middleware');
 
 const UserController = new BaseController(User);
 
@@ -15,9 +14,9 @@ const UserController = new BaseController(User);
 router
     .route('/users/:id?')
     .get(UserController.getObjectsWithPagination)
-    .post(noQueryParams, userValidation, UserController.createOne)
+    .post(userValidation, UserController.createOne)
     .get(UserController.getOneById)
-    .put(UserController.updateOneById)
+    .put(userValidation, UserController.updateOneById)
     .delete(UserController.deleteOneById);
 
 module.exports = router;

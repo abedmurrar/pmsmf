@@ -14,12 +14,7 @@ const knex = require('./db/config');
 Model.knex(knex);
 
 /* Get all routers */
-const carsRouter = require('./routes/api/cars');
-const driversRouter = require('./routes/api/drivers');
-const ralliesRouter = require('./routes/api/rallies');
-const usersRouter = require('./routes/api/users');
-
-const indexRouter = require('./routes/index');
+const routes = require('./routes');
 
 const ACCESS_LOG_FILE = path.resolve('access.log');
 /* Application start */
@@ -83,8 +78,8 @@ app.use(
 app.use(express.static(path.join(__dirname, 'public')));
 
 /* Routers */
-app.use('/', indexRouter);
-
-app.use('/api', [carsRouter, driversRouter, ralliesRouter, usersRouter]);
+app.use('/', routes.viewsRouter);
+app.use('/api', routes.apisRouter);
+app.use('/auth', routes.authRouter);
 
 module.exports = app;

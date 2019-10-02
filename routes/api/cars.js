@@ -5,9 +5,8 @@ const router = express.Router();
 
 /* Model */
 const { Car } = require('../../models');
-// const CarController = require('../../controllers/carController');
-const BaseController = require('../../controllers/baseController');
-const { noQueryParams, carValidation } = require('../middleware');
+const { BaseController } = require('../../controllers');
+const { carValidation } = require('../middleware');
 
 const CarController = new BaseController(Car);
 
