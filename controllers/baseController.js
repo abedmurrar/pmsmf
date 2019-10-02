@@ -1,4 +1,4 @@
-const HTTPStatus = require('../routes/status_codes');
+const HTTPStatus = require('./status_codes');
 
 // const { check, validationResult } = require('express-validator');
 
