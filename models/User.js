@@ -15,7 +15,8 @@ class User extends BaseModel {
                 last_name: { type: 'string' },
                 username: { type: 'string', maxLength: '20' },
                 password: { type: 'string' },
-                salt: { type: 'string' }
+                salt: { type: 'string' },
+                is_active: { type: 'boolean', default: true }
             },
             additionalProperties: false
         };

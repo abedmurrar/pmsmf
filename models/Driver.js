@@ -20,7 +20,8 @@ class Driver extends BaseModel {
                 email: { type: 'string', format: 'email' },
                 sponsor: { type: 'string' },
                 car_id: { type: 'integer' },
-                remarks: { type: 'string' }
+                remarks: { type: 'string' },
+                is_active: { type: 'boolean' }
             },
             additionalProperties: false
         };

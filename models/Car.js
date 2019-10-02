@@ -1,5 +1,7 @@
 const BaseModel = require('./BaseModel');
-// const Driver = require('./Driver');
+
+const CAR_CLASS_TYPES = ['A', 'B', 'C'];
+const CAR_PUSH_TYPES = ['R', 'F', '4'];
 
 class Car extends BaseModel {
     static get tableName() {
@@ -17,9 +19,10 @@ class Car extends BaseModel {
                 year_of_production: { type: 'integer', pattern: '^[0-9]{4}$' },
                 license_no: { type: 'string', pattern: '^[A-Za-z0-9]{6,7}$' },
                 motor_capacity: { type: 'string' },
-                car_class: { type: 'string' }, // TODO: figure out this shit
-                push_type: { type: 'string', pattern: '^[R|F|4]$' },
-                remarks: { type: 'string' }
+                car_class: { type: 'string', enum: CAR_CLASS_TYPES },
+                push_type: { type: 'string', enum: CAR_PUSH_TYPES },
+                remarks: { type: 'string' },
+                is_active: { type: 'boolean', default: true }
             },
             additionalProperties: false
         };

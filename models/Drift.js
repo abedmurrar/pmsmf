@@ -1,5 +1,4 @@
 const BaseModel = require('./BaseModel');
-const Rally = require('./Rally');
 
 class Drift extends BaseModel {
     static get tableName() {
@@ -14,12 +13,13 @@ class Drift extends BaseModel {
                 rally_id: { type: 'integer' },
                 driver_id: { type: 'integer' },
                 racing_number: { type: 'integer' },
-                score_1: { type: 'integer' },
-                score_2: { type: 'integer' },
-                score_3: { type: 'integer' },
-                fouls_1: { type: 'integer' },
-                fouls_2: { type: 'integer' },
-                fouls_3: { type: 'integer' }
+                score_1: { type: 'integer', default: 0 },
+                score_2: { type: 'integer', default: 0 },
+                score_3: { type: 'integer', default: 0 },
+                fouls_1: { type: 'integer', default: 0 },
+                fouls_2: { type: 'integer', default: 0 },
+                fouls_3: { type: 'integer', default: 0 },
+                is_active: { type: 'boolean', default: true }
             },
             additionalProperties: false
         };
@@ -29,7 +29,7 @@ class Drift extends BaseModel {
         return {
             rally: {
                 relation: BaseModel.BelongsToOneRelation,
-                modelClass: Rally,
+                modelClass: 'Rally',
                 join: {
                     from: 'drift_manage.rally_id',
                     to: 'rallies.id'
