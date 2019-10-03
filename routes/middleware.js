@@ -35,6 +35,7 @@ const carValidation = [
         .trim()
         .escape(),
     body('year_of_production').matches('^[0-9]{4}$'),
+    sanitizeBody('year_of_production').toInt(),
     body('license_no').matches('^[A-Za-z0-9]{6,7}$'),
     body('motor_capacity')
         .isString()
@@ -42,8 +43,7 @@ const carValidation = [
         .escape(),
     body('car_class')
         .isString()
-        .trim()
-        .escape(),
+        .trim(),
     body('push_type')
         .isString()
         .trim()
@@ -73,7 +73,6 @@ const driverValidation = [
         .escape(),
     body('id_card_no')
         .isString()
-        .isNumeric() // TODO: Check if this is the right way
         .trim()
         .escape(),
     body('mobile')
@@ -89,6 +88,7 @@ const driverValidation = [
         .trim()
         .escape(),
     body('car_id').isInt(),
+    sanitizeBody('car_id').toInt(),
     body('remarks')
         .isString()
         .trim()
@@ -118,27 +118,42 @@ const rallyValidation = [
 
 const speedValidation = [
     body('rally_id').isInt(),
+    sanitizeBody('rally_id').toInt(),
     body('driver_id').isInt(),
+    sanitizeBody('driver_id').toInt(),
     body('racing_number').isInt(),
+    sanitizeBody('racing_number').toInt(),
     body('time_1').matches(timeRegex),
     body('time_2').matches(timeRegex),
     body('time_3').matches(timeRegex),
     body('best_time').matches(timeRegex),
     body('fouls_1').isInt(),
+    sanitizeBody('fouls_1').toInt(),
     body('fouls_2').isInt(),
-    body('fouls_3').isInt()
+    sanitizeBody('fouls_2').toInt(),
+    body('fouls_3').isInt(),
+    sanitizeBody('fouls_3').toInt()
 ];
 
 const driftValidation = [
     body('rally_id').isInt(),
+    sanitizeBody('rally_id').toInt(),
     body('driver_id').isInt(),
+    sanitizeBody('driver_id').toInt(),
     body('racing_number').isInt(),
-    body('score_3').isInt(),
+    sanitizeBody('racing_number').toInt(),
     body('score_1').isInt(),
+    sanitizeBody('score_1').toInt(),
     body('score_2').isInt(),
+    sanitizeBody('score_2').toInt(),
+    body('score_3').isInt(),
+    sanitizeBody('score_3').toInt(),
     body('fouls_1').isInt(),
+    sanitizeBody('fouls_1').toInt(),
     body('fouls_2').isInt(),
-    body('fouls_3').isInt()
+    sanitizeBody('fouls_2').toInt(),
+    body('fouls_3').isInt(),
+    sanitizeBody('fouls_3').toInt(),
 ];
 
 module.exports = {
