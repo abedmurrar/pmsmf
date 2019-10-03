@@ -1,12 +1,12 @@
 /* Express Router */
 const express = require('express');
+
 const router = express.Router();
 
 /* Model */
 const { Rally, Speed, Drift } = require('../../models');
-const BaseController = require('../../controllers/baseController');
-
-const { noQueryParams } = require('../middleware');
+const { BaseController } = require('../../controllers');
+const { rallyValidation } = require('../middleware');
 
 const RallyController = new BaseController(Rally);
 
@@ -14,9 +14,9 @@ const RallyController = new BaseController(Rally);
 router
     .route('/rallies/:id?')
     .get(RallyController.getObjectsWithPagination)
-    .post(noQueryParams, RallyController.createOne)
+    .post(rallyValidation, RallyController.createOne)
     .get(RallyController.getOneById)
-    .put(RallyController.updateOneById)
+    .put(rallyValidation, RallyController.updateOneById)
     .delete(RallyController.deleteOneById);
 
 router.get('/rallies/speed', async (req, res, next) => {

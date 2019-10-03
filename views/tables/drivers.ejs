@@ -16,6 +16,7 @@
         <%- include('../includes/nav') %>
         <div class="card col-xl-10 offset-xl-2 col-9 offset-3 col-md-9 offset-md-3 col-lg-10 offset-lg-2 col-sm-8 offset-sm-4 mr-1">
             <div class="card-body">
+                <a href="/drivers/create" class="btn btn-primary">Add Driver</a>
                 <div class="">
                     <table
                             id="drivers"
@@ -53,7 +54,20 @@
                 { title: 'Mobile', data: 'mobile' },
                 { title: 'Email', data: 'email' },
                 { title: 'Sponsor', data: 'sponsor' },
-                { title: 'Remarks', data: 'remarks' }
+                { title: 'Remarks', data: 'remarks' },
+                {
+                    title:'Actions',
+                    orderable:false,
+                    mRender: function (data, type, row) {
+                        return `
+                                <a class="btn btn-sm btn-info" data-id="${row.id}" href="/drivers/${row.id}/update">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-danger" data-id="${row.id}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>`
+                    }
+                }
             ],
             processing: true,
             serverSide: true,

@@ -43,6 +43,8 @@ exports.up = function(knex) {
                     .nullable()
                     .unsigned();
                 table.string('remarks');
+                table.boolean('is_active').defaultTo(true);
+                table.timestamps();
 
                 table
                     .foreign('car_id', 'idcars_idx')

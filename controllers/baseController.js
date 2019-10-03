@@ -1,4 +1,4 @@
-const HTTPStatus = require('../routes/status_codes');
+const HTTPStatus = require('./status_codes');
 
 // const { check, validationResult } = require('express-validator');
 
@@ -34,8 +34,7 @@ class BaseController {
             const object = await this.model
                 .query()
                 .findById(req.params.id)
-                // .eager('drivers')
-                // .limit(10)
+                .where('is_active', true)
                 .throwIfNotFound();
             res.json(object);
         } catch (err) {
@@ -60,7 +59,8 @@ class BaseController {
         try {
             await this.model
                 .query()
-                .deleteById(req.params.id)
+                .patch({ is_active: false })
+                .findById(req.params.id)
                 .throwIfNotFound();
             res.status(HTTPStatus.NO_CONTENT).json(null);
         } catch (err) {
@@ -73,6 +73,7 @@ class BaseController {
             const updateObject = await this.model
                 .query()
                 .patchAndFetchById(req.params.id, req.body)
+                .where('is_active', true)
                 .throwIfNotFound();
             res.status(HTTPStatus.OK).json(updateObject);
         } catch (err) {

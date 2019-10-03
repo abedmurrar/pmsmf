@@ -23,13 +23,15 @@ exports.up = function(knex) {
                     .primary()
                     .notNullable();
                 table.string('manufacturer').notNullable();
-                table.string('model').nullable();
+                table.string('model').notNullable();
                 table.specificType('year_of_production', 'YEAR(4)').nullable();
                 table.string('license_no').nullable();
                 table.string('motor_capacity').nullable();
-                table.string('car_class').nullable();
-                table.string('push_type').nullable();
+                table.string('car_class').notNullable();
+                table.string('push_type').notNullable();
                 table.string('remarks');
+                table.boolean('is_active').defaultTo(true);
+                table.timestamps();
 
                 table.charset('utf8');
                 table.engine('InnoDB');

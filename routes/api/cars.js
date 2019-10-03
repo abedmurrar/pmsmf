@@ -5,9 +5,8 @@ const router = express.Router();
 
 /* Model */
 const { Car } = require('../../models');
-// const CarController = require('../../controllers/carController');
-const BaseController = require('../../controllers/baseController');
-const { noQueryParams, carValidation } = require('../middleware');
+const { BaseController } = require('../../controllers');
+const { carValidation } = require('../middleware');
 
 const CarController = new BaseController(Car);
 
@@ -15,7 +14,7 @@ const CarController = new BaseController(Car);
 router
     .route('/cars/:id?')
     .get(CarController.getObjectsWithPagination)
-    .post(noQueryParams, carValidation, CarController.createOne)
+    .post(carValidation, CarController.createOne)
     .get(CarController.getOneById)
     .put(CarController.updateOneById)
     .delete(CarController.deleteOneById);

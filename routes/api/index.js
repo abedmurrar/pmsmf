@@ -3,9 +3,4 @@ const driversController = require('./drivers');
 const ralliesController = require('./rallies');
 const usersController = require('./users');
 
-module.exports = {
-    carsController,
-    driversController,
-    ralliesController,
-    usersController
-};
+module.exports = [carsController, driversController, ralliesController, usersController];

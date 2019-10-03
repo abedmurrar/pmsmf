@@ -2,12 +2,6 @@ const { body, sanitizeBody } = require('express-validator');
 
 const timeRegex = /^[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/;
 
-const noQueryParams = (req, res, next) => {
-    if (!req.params.id) {
-        next(new Error('not found'));
-    }
-};
-
 const userValidation = [
     body('first_name')
         .isString()
@@ -157,7 +151,6 @@ const driftValidation = [
 ];
 
 module.exports = {
-    noQueryParams,
     userValidation,
     carValidation,
     driverValidation,

@@ -24,18 +24,10 @@ exports.up = function(knex) {
                 table.string('name').notNullable();
                 table.string('city').nullable();
                 table.date('date').nullable();
-                table
-                    .integer('type', 11)
-                    .nullable()
-                    .unsigned();
+                table.string('type');
                 table.string('remarks');
-
-                table
-                    .foreign('type', 'rally_type_fk_idx')
-                    .references('id')
-                    .inTable('rally_types')
-                    .onDelete('NO ACTION')
-                    .onUpdate('NO ACTION');
+                table.boolean('is_active').defaultTo(true);
+                table.timestamps();
 
                 table.charset('utf8');
                 table.engine('InnoDB');

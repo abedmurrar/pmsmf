@@ -11,6 +11,8 @@ exports.up = function(knex) {
                 table.string('last_name').notNullable();
                 table.string('password').notNullable();
                 table.string('salt').notNullable();
+                table.boolean('is_active').defaultTo(true);
+                table.timestamps();
 
                 table.charset('utf8');
                 table.engine('InnoDB');

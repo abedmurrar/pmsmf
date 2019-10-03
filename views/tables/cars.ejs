@@ -51,7 +51,20 @@
                 { title: 'Motor Cap', data: 'motor_capacity' },
                 { title: 'Class', data: 'car_class' },
                 { title: 'Push', data: 'push_type' },
-                { title: 'Remarks', data: 'remarks' }
+                { title: 'Remarks', data: 'remarks' },
+                {
+                    title:'Actions',
+                    orderable:false,
+                    mRender: function (data, type, row) {
+                        return `
+                                <a class="btn btn-sm btn-info" data-id="${row.id}" href="/cars/${row.id}/update">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <a class="btn btn-sm btn-danger" data-id="${row.id}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>`
+                    }
+                }
             ],
             processing: true,
             serverSide: true,

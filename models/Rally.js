@@ -1,6 +1,7 @@
+/* eslint-disable max-classes-per-file */
 const BaseModel = require('./BaseModel');
-const Driver = require('./Driver');
-const Car = require('./Car');
+
+const RALLY_TYPES = ['S', 'D', '4'];
 
 class Rally extends BaseModel {
     static get tableName() {
@@ -16,8 +17,9 @@ class Rally extends BaseModel {
                 name: { type: 'string' },
                 city: { type: 'string' },
                 date: { type: 'string', format: 'date' },
-                type: { type: 'integer' },
-                remarks: { type: 'string' }
+                type: { type: 'string', enum: RALLY_TYPES },
+                remarks: { type: 'string' },
+                is_active: { type: 'boolean' }
             },
             additionalProperties: false
         };
@@ -28,7 +30,7 @@ class Rally extends BaseModel {
             // TODO : this shouldn't be here, it shoud be in Speed and Drift
             drivers: {
                 relation: BaseModel.HasManyRelation,
-                modelClass: Driver,
+                modelClass: 'Driver',
                 join: {
                     from: 'rallies.driver_id',
                     to: 'drivers.id'
@@ -36,7 +38,7 @@ class Rally extends BaseModel {
             },
             cars: {
                 relation: BaseModel.ManyToManyRelation,
-                modelClass: Car,
+                modelClass: 'Car',
                 join: {
                     from: 'rallies.driver_id',
                     through: {

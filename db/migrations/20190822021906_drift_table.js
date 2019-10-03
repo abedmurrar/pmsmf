@@ -36,9 +36,15 @@ exports.up = function(knex) {
                     .integer('racing_number')
                     .notNullable()
                     .unsigned();
-                table.integer('score_1').notNullable();
-                table.integer('score_2').notNullable();
-                table.integer('score_3').notNullable();
+                table.integer('score_1').nullable();
+                table.integer('score_2').nullable();
+                table.integer('score_3').nullable();
+                table.integer('fouls_1').nullable();
+                table.integer('fouls_2').nullable();
+                table.integer('fouls_3').nullable();
+                table.boolean('is_active').defaultTo(true);
+                table.timestamps();
+                table.unique(['rally_id', 'racing_number', 'is_active']);
 
                 table
                     .foreign('rally_id', 'rally_id_fk_idx')
