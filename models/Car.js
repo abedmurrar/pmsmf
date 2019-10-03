@@ -42,4 +42,4 @@ class Car extends BaseModel {
     }
 }
 
-module.exports = Car;
+module.exports = { Car, CAR_CLASS_TYPES, CAR_PUSH_TYPES };

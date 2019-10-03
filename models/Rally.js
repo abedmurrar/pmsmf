@@ -52,4 +52,4 @@ class Rally extends BaseModel {
     }
 }
 
-module.exports = Rally;
+module.exports = { Rally, RALLY_TYPES };

@@ -1,8 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const faker = require('faker');
-
-const carClasses = ['A', 'B', 'C'];
-const pushTypes = ['R', 'F', '4'];
+const { CAR_CLASS_TYPES, CAR_PUSH_TYPES } = require('../../../models');
 const motorCapacities = [
     '1600 T',
     '1400 T',
@@ -26,8 +24,8 @@ const createFakeCar = () => ({
     year_of_production: faker.random.number({ min: 1970, max: 2019 }),
     license_no: faker.random.number({ min: 1000000, max: 9999999 }),
     motor_capacity: faker.random.arrayElement(motorCapacities),
-    car_class: faker.random.arrayElement(carClasses),
-    push_type: faker.random.arrayElement(pushTypes)
+    car_class: faker.random.arrayElement(CAR_CLASS_TYPES),
+    push_type: faker.random.arrayElement(CAR_PUSH_TYPES)
 });
 exports.seed = function(knex) {
     // const fakeCars = [];
