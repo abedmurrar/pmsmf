@@ -25,10 +25,16 @@ exports.up = function(knex) {
                 table.string('city').nullable();
                 table.date('date').nullable();
                 table.string('type');
-                table.string('remarks');
+                table.text('remarks');
                 table.boolean('is_active').defaultTo(true);
-                table.timestamps();
-
+                table
+                    .dateTime('created_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+                table
+                    .dateTime('updated_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
                 table.charset('utf8');
                 table.engine('InnoDB');
             });

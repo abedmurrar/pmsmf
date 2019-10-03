@@ -12,8 +12,14 @@ exports.up = function(knex) {
                 table.string('password').notNullable();
                 table.string('salt').notNullable();
                 table.boolean('is_active').defaultTo(true);
-                table.timestamps();
-
+                table
+                    .dateTime('created_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+                table
+                    .dateTime('updated_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
                 table.charset('utf8');
                 table.engine('InnoDB');
             });

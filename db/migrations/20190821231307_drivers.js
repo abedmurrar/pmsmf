@@ -42,9 +42,16 @@ exports.up = function(knex) {
                     .integer('car_id', 11)
                     .nullable()
                     .unsigned();
-                table.string('remarks');
+                table.text('remarks');
                 table.boolean('is_active').defaultTo(true);
-                table.timestamps();
+                table
+                    .dateTime('created_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+                table
+                    .dateTime('updated_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 
                 table
                     .foreign('car_id', 'idcars_idx')

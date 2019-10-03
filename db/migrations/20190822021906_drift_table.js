@@ -43,7 +43,14 @@ exports.up = function(knex) {
                 table.integer('fouls_2').nullable();
                 table.integer('fouls_3').nullable();
                 table.boolean('is_active').defaultTo(true);
-                table.timestamps();
+                table
+                    .dateTime('created_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP'));
+                table
+                    .dateTime('updated_at')
+                    .notNullable()
+                    .defaultTo(knex.raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
                 table.unique(['rally_id', 'racing_number', 'is_active']);
 
                 table
