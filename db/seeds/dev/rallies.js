@@ -9,10 +9,10 @@ const createFakeRally = () => ({
     type: faker.random.arrayElement(RALLY_TYPES)
 });
 exports.seed = function(knex) {
-    const fakeRallies = [];
-    const desiredFakeRallies = 100;
-    for (let i = 0; i < desiredFakeRallies; i++) {
-        fakeRallies.push(createFakeRally());
-    }
-    return knex('rallies').insert(fakeRallies);
+    // const fakeRallies = [];
+    // const desiredFakeRallies = 100;
+    // for (let i = 0; i < desiredFakeRallies; i++) {
+    //     fakeRallies.push(createFakeRally());
+    // }
+    // return knex('rallies').insert(fakeRallies);
 };
