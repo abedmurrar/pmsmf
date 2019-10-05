@@ -16,7 +16,7 @@ router
     .get(CarController.getObjectsWithPagination)
     .post(carValidation, CarController.createOne)
     .get(CarController.getOneById)
-    .put(CarController.updateOneById)
+    .put(carValidation, CarController.updateOneById)
     .delete(CarController.deleteOneById);
 
 module.exports = router;
