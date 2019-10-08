@@ -37,7 +37,7 @@
 
 <script>
     $(document).ready(function() {
-        const table = $('#rallies').DataTable({
+        $('#rallies').DataTable({
             ajax: {
                 url: '/api/rallies',
                 dataSrc: 'data.results'
@@ -64,18 +64,10 @@
                 }
             ],
             processing: true,
-            serverSide: true,
-            deferRender: true
-        });
-
-        table.buttons().action( function( e, dt, button, config ) {
-    console.log( 'Button '+this.text()+' activated' );
-    this.disable();
-} );
-
-        table.on('draw', function(e, settiongs) {
-            console.log(e);
-            console.log(settiongs);
+            deferRender: true,
+            scrollY: true,
+            scrollX: true,
+            orderMulti: true
         });
     });
 </script>

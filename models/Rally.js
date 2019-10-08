@@ -11,7 +11,7 @@ class Rally extends BaseModel {
     static get jsonSchema() {
         return {
             type: 'object',
-            required: ['name'],
+            required: ['name', 'date', 'city', 'type'],
             properties: {
                 id: { type: 'integer' },
                 name: { type: 'string' },

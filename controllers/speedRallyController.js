@@ -5,7 +5,7 @@ const { Model } = require('objection');
 const express = require('express');
 const HTTPStatus = require('./status_codes');
 
-class BaseController {
+class SpeedRallyController {
     /**
      *
      * Initializes a new Controller for an objection model
@@ -14,7 +14,7 @@ class BaseController {
      */
     constructor(model) {
         this.model = model;
-        this.getObjectsWithPagination = this.getObjectsWithPagination.bind(this);
+        this.getAll = this.getAll.bind(this);
         this.getOneById = this.getOneById.bind(this);
         this.createOne = this.createOne.bind(this);
         this.deleteOneById = this.deleteOneById.bind(this);
@@ -27,17 +27,18 @@ class BaseController {
      * @param {express.response} res
      * @param {Function} next
      */
-    async getObjectsWithPagination(req, res, next) {
+    async getAll(req, res, next) {
         if (req.params.id) {
             return next();
         }
         try {
-            const objects = await this.model.query().selectWithPagination(req.query);
+            const objects = await this.model
+                .query()
+                .select()
+                .where('is_active', true)
+                .andWhere('rally_id', req.params.rallyId);
             res.json({
-                data: objects,
-                draw: req.query.draw,
-                recordsTotal: objects.total,
-                recordsFiltered: objects.total
+                data: objects
             });
         } catch (err) {
             next(err);
@@ -56,6 +57,7 @@ class BaseController {
                 .query()
                 .findById(req.params.id)
                 .where('is_active', true)
+                .andWhere('rally_id', req.params.rallyId)
                 .throwIfNotFound();
             res.json(object);
         } catch (err) {
@@ -73,7 +75,6 @@ class BaseController {
         // const errors = validationResult(req);
         // if (!errors.isEmpty()) {
         //     return res.status(422).json({ errors: errors.array() });
-        console.log(req.body);
         // }
         try {
             const createdObject = await this.model.query().insertGraphAndFetch(req.body);
@@ -93,8 +94,8 @@ class BaseController {
         try {
             await this.model
                 .query()
-                .patch({ is_active: false })
-                .findById(req.params.id)
+                .where('rally_id', req.params.rallyId)
+                .patchAndFetchById(req.params.id, { is_active: false })
                 .throwIfNotFound();
             res.status(HTTPStatus.NO_CONTENT).json(null);
         } catch (err) {
@@ -114,6 +115,7 @@ class BaseController {
                 .query()
                 .patchAndFetchById(req.params.id, req.body)
                 .where('is_active', true)
+                .andWhere('rally_id', req.params.rallyId)
                 .throwIfNotFound();
             res.status(HTTPStatus.OK).json(updateObject);
         } catch (err) {
@@ -122,4 +124,4 @@ class BaseController {
     }
 }
 
-module.exports = BaseController;
+module.exports = SpeedRallyController;

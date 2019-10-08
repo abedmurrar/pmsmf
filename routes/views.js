@@ -6,7 +6,6 @@ const { Car, Driver, Rally } = require('../models');
 
 /* Dashboard */
 router.route('/').get(async (req, res) => {
-    // console.log(req.params);
     res.render('base.ejs', { title: 'abed' });
 });
 
@@ -23,12 +22,12 @@ router.get('/cars/create', async (req, res) => {
 
 router.get('/cars/:id/update', async (req, res, next) => {
     try {
-        const object = await Car.query()
+        const car = await Car.query()
             .findById(req.params.id)
             .throwIfNotFound();
         res.render('forms/car.ejs', {
             title: 'Update car',
-            form: object,
+            form: car,
             card_header: 'Update car',
             action: `/api/cars/${req.params.id}`,
             method: 'PUT'
@@ -51,12 +50,12 @@ router.get('/drivers/create', async (req, res) => {
 
 router.get('/drivers/:id/update', async (req, res, next) => {
     try {
-        const object = await Driver.query()
+        const driver = await Driver.query()
             .findById(req.params.id)
             .throwIfNotFound();
         res.render('forms/driver.ejs', {
             title: 'Update driver',
-            form: object,
+            form: driver,
             card_header: 'Update driver',
             action: `/api/cars/${req.params.id}`,
             method: 'PUT'
@@ -79,12 +78,12 @@ router.get('/rallies/create', async (req, res) => {
 
 router.get('/rallies/:id/update', async (req, res, next) => {
     try {
-        const object = await Rally.query()
+        const rally = await Rally.query()
             .findById(req.params.id)
             .throwIfNotFound();
         res.render('forms/rally.ejs', {
             title: 'Update rally',
-            form: object,
+            form: rally,
             card_header: 'Update rally',
             action: `/api/rallies/${req.params.id}`,
             method: 'PUT'
@@ -94,10 +93,54 @@ router.get('/rallies/:id/update', async (req, res, next) => {
     }
 });
 
+/* Speed & Drift Rallies */
+router.get('/rallies/:id/manage', async (req, res, next) => {
+    try {
+        const rally = await Rally.query()
+            .findById(req.params.id)
+            .throwIfNotFound();
+
+        switch (rally.type) {
+            case 'S':
+                res.render('forms/speedManage.ejs', {
+                    title: `Manage ${rally.name} Speed Rally`,
+                    form: rally,
+                    card_header: 'Update rally',
+                    action: `/api/rallies/${req.params.id}`,
+                    method: 'PUT'
+                });
+                break;
+            case 'D':
+                res.render('forms/driftManage.ejs', {
+                    title: `Manage ${rally.name} Drift Rally`,
+                    form: rally,
+                    card_header: `Update rally`,
+                    action: `/api/rallies/${req.params.id}`,
+                    method: 'PUT'
+                });
+                break;
+            // case '4':
+            //     res.render('forms/rally.ejs', {
+            //         title: 'Update rally',
+            //         form: rally,
+            //         card_header: 'Update rally',
+            //         action: `/api/rallies/${req.params.id}`,
+            //         method: 'PUT'
+            //     });
+            //     break;
+            default:
+                throw new Error('Error type, Contact moderators.');
+        }
+    } catch (err) {
+        next(err);
+    }
+});
+
 /* Tables */
 router.get('/cars', async (req, res) => {
     res.render('tables/cars.ejs', { title: 'cars' });
 });
+
 router.get('/drivers', async (req, res) => {
     res.render('tables/drivers.ejs', { title: 'drivers' });
 });

@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 const faker = require('faker');
 const { CAR_CLASS_TYPES, CAR_PUSH_TYPES } = require('../../../models');
+
 const motorCapacities = [
     '1600 T',
     '1400 T',
@@ -29,7 +31,7 @@ const createFakeCar = () => ({
 });
 exports.seed = function(knex) {
     // const fakeCars = [];
-    // const desiredFakeCars = 100;
+    // const desiredFakeCars = 1000;
     // for (let i = 0; i < desiredFakeCars; i++) {
     //     fakeCars.push(createFakeCar());
     // }

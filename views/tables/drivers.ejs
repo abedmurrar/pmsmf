@@ -37,13 +37,11 @@
 
 <script>
     $(document).ready(function() {
-        const table = $('#drivers').DataTable({
+        $('#drivers').DataTable({
             ajax: {
                 url: '/api/drivers',
                 dataSrc: 'data.results'
             },
-            scrollX: true,
-            searching: true,
             columns: [
                 { title: 'ID', data: 'id' },
                 { title: 'First Name', data: 'first_name' },
@@ -70,13 +68,10 @@
                 }
             ],
             processing: true,
-            serverSide: true,
-            deferRender: true
-        });
-
-        table.on('draw', function(e, settiongs) {
-            console.log(e);
-            console.log(settiongs);
+            deferRender: true,
+            scrollY: true,
+            scrollX: true,
+            orderMulti: true
         });
     });
 </script>

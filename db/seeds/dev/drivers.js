@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 const faker = require('faker');
 const { Car } = require('../../../models');
@@ -26,8 +27,8 @@ const createFakeDriver = (min, max) => ({
     email: faker.internet.email(),
     sponsor: faker.company.companyName(),
     car_id: faker.random.number({
-        min: min,
-        max: max
+        min,
+        max
     })
 });
 exports.seed = function(knex) {

@@ -38,7 +38,7 @@ router.get('/rallies/drift', async (req, res, next) => {
 });
 
 router
-    .route('/rallies/:rallyId/speed/:speedId?')
+    .route('/rallies/:rallyId/speed/:id?')
     .get(async (req, res, next) => {
         if (req.params.speedId) {
             return next();
