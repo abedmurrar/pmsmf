@@ -26,17 +26,17 @@ app.set('view engine', 'ejs');
 
 /* Middlewares */
 
-app.use(
-    helmet({
-        xssFilter: true,
-        referrerPolicy: true,
-        noSniff: true,
-        noCache: false,
-        hidePoweredBy: {
-            setTo: 'ASP.NET'
-        }
-    })
-);
+// app.use(
+//     helmet({
+//         xssFilter: true,
+//         referrerPolicy: true,
+//         noSniff: true,
+//         noCache: false,
+//         hidePoweredBy: {
+//             setTo: 'ASP.NET'
+//         }
+//     })
+// );
 
 morgan.token('body', function(req) {
     return JSON.stringify(req.body);

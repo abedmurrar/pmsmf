@@ -19,7 +19,9 @@
     "morgan": "~1.9.1",
     "mysql2": "^1.7.0",
     "objection": "^1.6.9",
-    "objection-db-errors": "^1.1.1"
+    "objection-db-errors": "^1.1.1",
+    "qs": "^6.9.0",
+    "querystring": "^0.2.0"
   },
   "devDependencies": {
     "eslint": "^6.2.1",

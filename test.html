@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+        <script src="public/js/jquery-3.4.1.min.js"></script>
+    </head>
+    <body>
+        <form name="7affaf" id="rally-form" action="http://localhost:3000/test" method="POST">
+            <div>
+                <input type="text" id="1" name="[][name]"  />
+                <input type="text" id="2" name="[][value]"  />
+                <br />
+                <input type="text" id="3" name="[][name]"  />
+                <input type="text" id="4" name="[][value]"  />
+                <br />
+                <input type="text" id="5" name="[][name]"  />
+                <input type="text" id="6" name="[][value]"  />
+                <input type="submit" id="8" name='kawto' value="SUBMIT" />
+            </div>
+        </form>
+        <script>
+            $('form').submit(e=>{
+                console.log($(this).serializeArray());
+                e.preventDefault();
+
+            })
+            </script>
+    </body>
+</html>

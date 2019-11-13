@@ -4,6 +4,11 @@ const express = require('express');
 const router = express.Router();
 const { Car, Driver, Rally } = require('../models');
 
+router.post('/test', (req, res) => {
+    console.log(req.body);
+    res.json(null);
+});
+
 /* Dashboard */
 router.route('/').get(async (req, res) => {
     res.render('base.ejs', { title: 'abed' });
